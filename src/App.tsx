@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import "./App.css";
 
 type AppProps = { message: string };
@@ -8,12 +8,13 @@ const App: React.FC<{ message: string }> = ({ message }) => {
         <>
             <div>{message}</div>
             <Reverse />
+            <List />
         </>
     );
 };
 
 const Reverse: React.FC = (): JSX.Element => {
-    const [text, setText] = useState("");
+    const [text, setText] = React.useState<string>("");
 
     return (
         <>
