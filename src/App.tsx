@@ -1,6 +1,8 @@
 import * as React from "react";
 import "./App.css";
 
+
+// useState
 type AppProps = { message: string };
 
 const App: React.FC<{ message: string }> = ({ message }) => {
@@ -27,6 +29,7 @@ const Reverse: React.FC = (): JSX.Element => {
     );
 };
 
+// useContext
 interface IItem {
     id: number;
     name: string;
@@ -53,6 +56,7 @@ const List: React.FC = (): JSX.Element => {
     );
 };
 
+// useContext
 interface IContext {
     theme: string;
     color: string;
