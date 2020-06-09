@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./App.css";
 
-
 // useState
 type AppProps = { message: string };
 
@@ -14,6 +13,7 @@ const App: React.FC<{ message: string }> = ({ message }) => {
             <ThemeContext.Provider value={{ color: "skyblue" }}>
                 <Toolbar />
             </ThemeContext.Provider>
+            <Counter />
         </>
     );
 };
@@ -72,6 +72,39 @@ const ThemedButton: React.FC = ({ children }): JSX.Element => {
 
 const Toolbar: React.FC = (): JSX.Element => {
     return <ThemedButton>buttonA</ThemedButton>;
+};
+
+// useReducer
+interface IState {
+    count: number;
+}
+
+interface IAction {
+    type: "increment" | "decrement";
+}
+
+const initialState: IState = { count: 0 };
+
+function reducer(state: IState, action: IAction) {
+    switch (action.type) {
+        case "increment":
+            return { count: state.count + 1 };
+        case "decrement":
+            return { count: state.count - 1 };
+        default:
+            throw new Error();
+    }
+}
+
+const Counter: React.FC = (): JSX.Element => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+    return (
+        <>
+            Count: {state.count}
+            <button onClick={() => dispatch({ type: "increment" })}>+</button>
+            <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+        </>
+    );
 };
 
 export default App;
