@@ -9,6 +9,9 @@ const App: React.FC<{ message: string }> = ({ message }) => {
             <div>{message}</div>
             <Reverse />
             <List />
+            <ThemeContext.Provider value={{ color: "skyblue" }}>
+                <Toolbar />
+            </ThemeContext.Provider>
         </>
     );
 };
@@ -48,6 +51,23 @@ const List: React.FC = (): JSX.Element => {
             ))}
         </form>
     );
+};
+
+interface IContext {
+    theme: string;
+    color: string;
+    font: string;
+}
+
+const ThemeContext = React.createContext<Partial<IContext>>({});
+
+const ThemedButton: React.FC = ({ children }): JSX.Element => {
+    const { color } = React.useContext(ThemeContext);
+    return <button style={{ background: color }}>{children}</button>;
+};
+
+const Toolbar: React.FC = (): JSX.Element => {
+    return <ThemedButton>buttonA</ThemedButton>;
 };
 
 export default App;
